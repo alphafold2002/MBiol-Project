@@ -1,0 +1,35 @@
+#in-house datasets 
+/drives/raid/AboobakerLab/yian/cheng_files/IR_bulk_rnaseq/sounakdata/wt1_sorted.bam
+/drives/raid/AboobakerLab/yian/cheng_files/IR_bulk_rnaseq/sounakdata/zero_sorted.bam
+/drives/raid/AboobakerLab/yian/cheng_files/IR_bulk_rnaseq/X204SC22113919-Z01-F001/01.RawData/W1_sorted.bam
+/drives/raid/AboobakerLab/yian/cheng_files/IR_bulk_rnaseq/X204SC22113919-Z01-F001/01.RawData/W2_sorted.bam
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/W3.bam
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/W4.bam
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/G1_1.bam
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/G1_2.bam
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/HEX1.bam
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/HEX2.bam
+
+#Pearson lab (Zhu et al., 2015)
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Pearson_X1_1.bam                             #SRR2009674
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Pearson_X1_2.bam                             #SRR2009675
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/live_RNA-seq/download_SRA/Pearson_X2_1.bam       #SRR2009676
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/live_RNA-seq/download_SRA/Pearson_X2_2.bam       #SRR2009677
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/live_RNA-seq/download_SRA/Pearson_Xins_1.bam     #SRR2009678
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/live_RNA-seq/download_SRA/Pearson_Xins_2.bam     #SRR2009679
+
+#Reddien lab (van Wolfswinkel et al., 2014)
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Reddien_X1_1.bam                             #SRR2009676
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Reddien_X1_2.bam                             #SRR2009677
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/X2Xins_RNA-seq/mapped_data/Reddien_X2_1.bam      #SRR2009678
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/X2Xins_RNA-seq/mapped_data/Reddien_X2_2.bam      #SRR2009679
+
+#Sanchez lab (Tu et al., 2015)
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Sanchez_X1_1.bam                             #SRR2407874
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Sanchez_X1_2.bam                             #SRR2407875
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Sanchez_X1_3.bam                             #SRR2407876
+/drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Sanchez_X1_4.bam                             #SRR2407877
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/X2Xins_RNA-seq/mapped_data/Sanchez_Xins_1.bam    #SRR2407878
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/X2Xins_RNA-seq/mapped_data/Sanchez_Xins_2.bam    #SRR2407879
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/X2Xins_RNA-seq/mapped_data/Sanchez_Xins_3.bam    #SRR2407880
+/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/X2Xins_RNA-seq/mapped_data/Sanchez_Xins_4.bam    #SRR2407881
