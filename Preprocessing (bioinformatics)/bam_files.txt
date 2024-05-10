@@ -9,6 +9,10 @@
 /drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/G1_2.bam
 /drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/HEX1.bam
 /drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/mapped_reads/HEX2.bam
+/drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/*name*_RNAseq/mapped_data_new/R1_G1.bam
+/drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/*name*_RNAseq/mapped_data_new/R1_G2.bam
+/drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/*name*_RNAseq/mapped_data_new/R2_G1.bam
+/drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/*name*_RNAseq/mapped_data_new/R2_G2.bam
 
 #Pearson lab (Zhu et al., 2015)
 /drives/raid/AboobakerLab/yian/cheng_files/live_sorted_x1_rnaseq/Pearson_X1_1.bam                             #SRR2009674
