@@ -71,6 +71,10 @@ fastqc Wt1_1.fastqc #Aboobaker_X1_1 R1
 fastqc Wt1_2.fastqc #Aboobaker_X1_1 R2
 fastqc zero_1.fastqc #Aboobaker_X1_2 R1
 fastqc zero_2.fastqc #Aboobaker_X1_2 R2
+fastqc R1_G1.fastqc #Aboobaker_X1_2 R2
+fastqc R1_G2.fastqc #Aboobaker_X1_2 R2
+fastqc R2_G2.fastqc #Aboobaker_X1_2 R2
+fastqc R2_G1.fastqc #Aboobaker_X1_2 R2
 ```
 
 ```{bash}
@@ -93,9 +97,9 @@ Step 3: removing short sequences
 #paired-end (for this step, I separated paired-end and single-end libraries into different directories)
 #trimmomatic_adaptorrem.sh
 
-in=/drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/raw_data #specifies location of raw paried-end fastq files 
-    out=/drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioinformatics/trimmed_data #specifies output location
-    adapters=/drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioinformatics/adapters.fasta #specifies files containing the adaptor
+in=/drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/raw_data #specifies location of raw paried-end fastq files 
+    out=/drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/bioinformatics/trimmed_data #specifies output location
+    adapters=/drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/bioinformatics/adapters.fasta #specifies files containing the adaptor
 
 paired_files_1=$(ls -R $in | grep _1.fastq) #grabs names of each sample (without the _1.fastq or _2.fastq at the end )
 
@@ -114,7 +118,7 @@ java -jar /drives/raid/AboobakerLab/software/Trimmomatic-0.39/trimmomatic-0.39.j
 ```{bash}
 #single-end 
 #use this code for each file (could also rewrite as a loop like in the case of paired-end data):
-java -jar /drives/raid/AboobakerLab/software/Trimmomatic-0.39/trimmomatic-0.39.jar SE Reddien_X2_2.fastq Reddien_X2_2_out_trimmed.fq -threads 16 ILLUMINACLIP:/drives/raid/AboobakerLab/kriszta/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/adapters.fasta:2:30:10 SLIDINGWINDOW:4:20 LEADING:10 TRAILING:10 MINLEN:36
+java -jar /drives/raid/AboobakerLab/software/Trimmomatic-0.39/trimmomatic-0.39.jar SE Reddien_X2_2.fastq Reddien_X2_2_out_trimmed.fq -threads 16 ILLUMINACLIP:/drives/raid/AboobakerLab/*name*/ACME_vs_live/preprocessing/ACME_RNA-seq/bioinformatics/adapters.fasta:2:30:10 SLIDINGWINDOW:4:20 LEADING:10 TRAILING:10 MINLEN:36
 
 ```
 
@@ -140,7 +144,7 @@ ls *_1_out_paired.fq |sort -u |while read id;do
   
 echo "Running on $f"
 #echo $id
-hisat2 -p 8 -x /drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/hisat2_index/dd_Smed_g4_index_new -1 *${f}*_1_out_paired.fq   -2 *${f}*_2_out_paired.fq | samtools view -Sb | samtools sort -o /drives/raid/AboobakerLab/kriszta/ACME_vs_live/remaining_analysis/aligned_data/${f}.bam
+hisat2 -p 8 -x /drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/hisat2_index/dd_Smed_g4_index_new -1 *${f}*_1_out_paired.fq   -2 *${f}*_2_out_paired.fq | samtools view -Sb | samtools sort -o /drives/raid/AboobakerLab/*name*/ACME_vs_live/remaining_analysis/aligned_data/${f}.bam
 done 
 
 
@@ -160,12 +164,12 @@ hisat2 -p 8 -x /drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioin
 
 #nohup ./map_to_mitochondria.sh > mapping.out_mitochondria 2>&1 &
 
-samtools view -f 4 -F 8 -b /drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/W1.bam > W1_1_unmapped.bam #extract mate 1
-samtools view -f 4 -f 8 -b /drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/W1.bam > W1_2_unmapped.bam  #extract mate 2
+samtools view -f 4 -F 8 -b /drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/W1.bam > W1_1_unmapped.bam #extract mate 1
+samtools view -f 4 -f 8 -b /drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/W1.bam > W1_2_unmapped.bam  #extract mate 2
 
 #significantly more mate 2 unmapped reads -> I am going to map them as non-paired 
 bedtools bamtofastq -i unmapped_W1.bam -fq unmapped_W1.fastq
-hisat2 -p 8 -x /drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/index_mitochondria/mitochonrial_index -U unmapped_W1.fasta | samtools view -Sb | samtools sort -o unmapped_W1_output.bam 
+hisat2 -p 8 -x /drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/index_mitochondria/mitochonrial_index -U unmapped_W1.fasta | samtools view -Sb | samtools sort -o unmapped_W1_output.bam 
 
 
 ```
@@ -177,8 +181,8 @@ hisat2 -p 8 -x /drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioin
 
 #paired unstranded
 
-exonCounts_pu <- featureCounts(readLines("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/library_all.txt")[1:10],
-                                               annot.ext =  "/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/Smed.transcripts.fasta.transdecoder.genome.gtf",
+exonCounts_pu <- featureCounts(readLines("/drives/raid/AboobakerLab/*name*/ACME_vs_live/library_all.txt")[1:10],
+                                               annot.ext =  "/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/Smed.transcripts.fasta.transdecoder.genome.gtf",
                                                isGTFAnnotationFile= TRUE,
                                                GTF.featureType = "exon",
                                                GTF.attrType = "gene_id",
@@ -193,8 +197,8 @@ exonCounts_pu <- featureCounts(readLines("/drives/raid/AboobakerLab/kriszta/ACME
 
 ```{r}
 #unpaired unstranded
-exonCounts_uu <- featureCounts(readLines("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/library_all.txt")[11:20],
-                annot.ext = "/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/Smed.transcripts.fasta.transdecoder.genome.gtf",
+exonCounts_uu <- featureCounts(readLines("/drives/raid/AboobakerLab/*name*/ACME_vs_live/library_all.txt")[11:20],
+                annot.ext = "/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/Smed.transcripts.fasta.transdecoder.genome.gtf",
                 isGTFAnnotationFile= TRUE,
                 GTF.featureType = "exon",
                 GTF.attrType = "gene_id",
@@ -208,8 +212,8 @@ exonCounts_uu <- featureCounts(readLines("/drives/raid/AboobakerLab/kriszta/ACME
 
 ```{r}
 #unpaired reverse stranded
-exonCounts_ur <- featureCounts(readLines("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/library_all.txt")[21:28],
-                annot.ext = "/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/Smed.transcripts.fasta.transdecoder.genome.gtf",
+exonCounts_ur <- featureCounts(readLines("/drives/raid/AboobakerLab/*name*/ACME_vs_live/library_all.txt")[21:28],
+                annot.ext = "/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/Smed.transcripts.fasta.transdecoder.genome.gtf",
                 isGTFAnnotationFile= TRUE,
                 GTF.featureType = "exon",
                 GTF.attrType = "gene_id",
@@ -235,7 +239,7 @@ merged_counts_tosave<- merged_counts_tosave[, -c(3, 4, 9, 10)]
 #reformat column names
 colnames(merged_counts_tosave)<- c("Aboobaker_X1_1", "Aboobaker_X1_2", "Aboobaker_G2_1", "Aboobaker_G2_2", "Aboobaker_G1_1", "Aboobaker_G1_2", "Pearson_X1_1", "Pearson_X1_2", "Pearson_X2_1", "Pearson_X2_2", "Pearson_Xins_1", "Pearson_Xins_2", "Reddien_X1_1", "Reddien_X1_2", "Reddien_X2_1", "Reddien_X2_2", "Sanchez_X1_1", "Sanchez_X1_2", "Sanchez_X1_3", "Sanchez_X1_4", "Sanchez_Xins_1", "Sanchez_Xins_2", "Sanchez_Xins_3", "Sanchez_Xins_4")
 
-write.csv(merged_counts_tosave, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/counts_tpm_matrices/counts_all_datasets.csv", row.names=TRUE)
+write.csv(merged_counts_tosave, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/counts_tpm_matrices/counts_all_datasets.csv", row.names=TRUE)
 
 matrix_all_datasets<- data.frame(matrix(ncol = 0, nrow = 24))
 
@@ -246,7 +250,7 @@ matrix_all_datasets$dissociation_method<- c("live", "live", "ACME", "ACME", "ACM
 matrix_all_datasets$cells<- c("X1", "X1", "G2", "G2", "G1", "G1", "X1", "X1", "X2", "X2", "Xins", "Xins","X1", "X1", "X2", "X2",  "X1", "X1", "X1", "X1", "Xins", "Xins", "Xins", "Xins")
 
 
-write.csv(matrix_all_datasets, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/matrix_all_datasets.csv", row.names=TRUE)
+write.csv(matrix_all_datasets, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/matrix_all_datasets.csv", row.names=TRUE)
 ```
 
 
@@ -315,9 +319,9 @@ DE_matrix_all<- merge(merged_tpms, tpm_ur, by = "row.names", all = TRUE)
 rownames(DE_matrix_all)<- DE_matrix_all$Row.names
 DE_matrix_all<- DE_matrix_all[, -c(1)]
 
-write.csv(DE_matrix_all, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/counts_tpm_matrices/tpm_all_datasets", row.names=TRUE )
+write.csv(DE_matrix_all, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/counts_tpm_matrices/tpm_all_datasets", row.names=TRUE )
 
-DE_matrix_read<- read.csv ("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/counts_tpm_matrices/tpm_all_datasets")
+DE_matrix_read<- read.csv ("/drives/raid/AboobakerLab/*name*/ACME_vs_live/counts_tpm_matrices/tpm_all_datasets")
 rownames(DE_matrix_read)<- DE_matrix_read$X
 DE_matrix_read<- DE_matrix_read[, -1]
 
@@ -325,7 +329,7 @@ DE_matrix<- DE_matrix_read[, -c(3, 4, 9, 10)]
 #reformat column names
 colnames(DE_matrix)<- c("Aboobaker_X1_1", "Aboobaker_X1_2", "Aboobaker_G2_1", "Aboobaker_G2_2", "Aboobaker_G1_1", "Aboobaker_G1_2", "Pearson_X1_1", "Pearson_X1_2", "Pearson_X2_1", "Pearson_X2_2", "Pearson_Xins_1", "Pearson_Xins_2", "Reddien_X1_1", "Reddien_X1_2", "Reddien_X2_1", "Reddien_X2_2", "Sanchez_X1_1", "Sanchez_X1_2", "Sanchez_X1_3", "Sanchez_X1_4", "Sanchez_Xins_1", "Sanchez_Xins_2", "Sanchez_Xins_3", "Sanchez_Xins_4")
 
-write.csv(DE_matrix, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/counts_tpm_matrices/tpm_all.csv", row.names=TRUE )
+write.csv(DE_matrix, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/counts_tpm_matrices/tpm_all.csv", row.names=TRUE )
 
 ```
 
