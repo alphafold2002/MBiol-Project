@@ -155,7 +155,7 @@ done
 
 ```{bash}
 #single end:
-hisat2 -p 8 -x /drives/raid/AboobakerLab/kriszta/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/hisat2_index/dd_Smed_g4_index_new -U Reddien_X2_2_out_trimmed.fq | samtools view -Sb | samtools sort -o Reddien_X2_2.bam 
+hisat2 -p 8 -x /drives/raid/AboobakerLab/*name*/ACME_vs_live/ACME_RNA-seq/bioinformatics/mapped_reads/hisat2_index/dd_Smed_g4_index_new -U Reddien_X2_2_out_trimmed.fq | samtools view -Sb | samtools sort -o Reddien_X2_2.bam 
 ```
 
 ### Extract unmapped files and map to the mitochondrial genome
