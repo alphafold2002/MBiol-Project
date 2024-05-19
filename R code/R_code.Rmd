@@ -49,7 +49,7 @@ library(pheatmap)
 
 ```{r}
 #load raw counts of all libraries used in the analysis
-counts<- read.csv("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/counts_tpm_matrices/counts_all_datasets.csv")
+counts<- read.csv("/drives/raid/AboobakerLab/*name*/ACME_vs_live/counts_tpm_matrices/counts_all_datasets.csv")
 rownames(counts)<-counts$X
 counts<- counts[, -1]
 
@@ -68,7 +68,7 @@ counts<- counts[, -c(7:8)]
 
 
 #load metadata 
-metadata<- read.csv("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/matrix_all_datasets.csv")
+metadata<- read.csv("/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/matrix_all_datasets.csv")
 rownames(metadata)<- metadata$library
 
 #remove metadata related to libraries not used in the analysis 
@@ -77,7 +77,7 @@ metadata<- metadata[-c(7:8), ]
 
 
 #load tpm values
-DE_matrix<- read.csv("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/counts_tpm_matrices/tpm_all_datasets")
+DE_matrix<- read.csv("/drives/raid/AboobakerLab/*name*/ACME_vs_live/counts_tpm_matrices/tpm_all_datasets")
 rownames(DE_matrix)<- DE_matrix$X
 DE_matrix<-DE_matrix[, -1]
 DE_matrix_all<- DE_matrix
@@ -89,12 +89,12 @@ DE_matrix<- DE_matrix[, -c(7:8)]
 
 
 #load list of transcription factors in the Smed genome 
-tf<- read.csv("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/tf.csv")
+tf<- read.csv("/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/tf.csv")
 rownames(tf)<- tf$X
 tf<-tf[, -1]
 
 #load table containing correspondence between different annotations of the Smed genome
-gene_correspondence<- read.csv("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/gene_correspondence.csv")
+gene_correspondence<- read.csv("/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/gene_correspondence.csv")
 rownames(gene_correspondence)<- gene_correspondence$X
 gene_correspondence<- gene_correspondence[, -1]
 gene_correspondence$transcripts <-(sub("\\.[^.]*$", "", gene_correspondence$V5))
@@ -134,10 +134,10 @@ GO_universe_format<- pfam_small %>%
 # remove the | sign and replace with comma 
 GO_universe_format$GO_terms<- str_replace_all(GO_universe_format$GO_terms, "\\|", ", ") 
 #save
-write.table(GO_universe_format, "/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/GO_universe_format.tsv", sep = "\t", col.names = F, row.names = F, quote = FALSE) 
+write.table(GO_universe_format, "/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/GO_universe_format.tsv", sep = "\t", col.names = F, row.names = F, quote = FALSE) 
 
 #prepare GO table
-geneID2GO = readMappings("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/GO_universe_format.tsv") 
+geneID2GO = readMappings("/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/GO_universe_format.tsv") 
 gene_all_names = names(geneID2GO)
 geneNames <- names(geneID2GO)
 
@@ -186,7 +186,7 @@ s3r3_sorted <- c(0.0,0.01497939166507343,0.03188077278931802,0.05281449184094253
 s3r1_sorted <- c(0.0,0.015900816814009112,0.0351848798153123,0.05851498986587088,0.08941647908655155,0.12743707394232032,0.15960893148176017,0.19689107972501768,0.24500177707477483,0.27164869312960477,0.30864346756918587,0.34516715709661205,0.3868603731536833,0.42934046511330054,0.473204594138535,0.5091679447729988,0.5215506338233363,0.5530773011517366,0.579107043940175,0.609988921299602,0.6243271930863786,0.6374739442414773,0.6566671522937072,0.6848005673831533,0.7041046424877766,0.7139710096666464,0.7320451409012171,0.7488328941343725,0.7660713199342962,0.788530903490431,0.7993126242751616,0.8104913851897627,0.8167563742551495,0.8285427026265485,0.8398843620621752,0.8629835324404199,0.8878409662163677,0.8901095382487328,0.9021760360666131,0.9142021094357867,0.9080840092087694,0.9187456573735795,0.9329674587190333,0.9410571513651457,0.9397587661017384,0.9523027527048359,0.9662764039691205,0.9725534002964993,0.9746862902683543,0.9922561164992587,0.9971130539750441,1.0,0.9927143936652888,0.9773130789501491,0.9716324433017088,0.9662115647543634,0.9707763255216755,0.9525613090797315,0.9562391334278972,0.9652617903307921,0.9741607724351687,0.9664449058790756,0.9559541610766191,0.9610844638837569,0.9556855986500635,0.9588883356654104,0.971332661993974,0.9620770642084333,0.9533625936966678,0.9423683443746778,0.9453889712498119,0.9463419476099145,0.939639894208017,0.9391704102641277,0.9329702604134981,0.9041432258229778,0.8921199541482688,0.8747902731572055,0.851029902885265,0.8493672973414321,0.8574269718325643,0.839430887800942,0.8257310021100762,0.809461562352911,0.7805856982302897,0.7503253967999847,0.725005683437343,0.7016259433705505,0.667631383460717,0.6288667386035074,0.5766087329616952,0.5224251627384242,0.4756148518624064,0.4426877375436664,0.36321167041826896,0.2781258104901845,0.20304400101181194,0.15453025990118824,0.07855190819407577,0.03594814143594046)
 #Sanchez_X1_4
 s3r4_sorted <- c(0.0,0.012268082557573914,0.025291299683634496,0.04299578029824554,0.07093086645167893,0.10558428537236655,0.1330936909159187,0.16917868514435833,0.2129222606902305,0.23597058237103286,0.2741044703395618,0.30906043237570147,0.34937858378018244,0.39283307163217934,0.4398622164830545,0.47685850971828014,0.4901467578753971,0.5213490650316834,0.5515687186728224,0.5804464998167208,0.59564908749816,0.6106783856592932,0.6361046472987426,0.6651752894852404,0.6841013592829973,0.6949480600340137,0.7101734811581285,0.7284418662588179,0.7440048961424938,0.7688607294551003,0.7829656809279185,0.7951946204409056,0.799267128038122,0.8132681057987566,0.828570182051854,0.8514154491888624,0.8728719537231355,0.8727463697884196,0.8834112184781265,0.89664319850865,0.8969803995281632,0.9055645507540541,0.9239059213232959,0.9344060430337001,0.9316664376526732,0.9441498069554743,0.9559734528609692,0.9658790895817118,0.9693942165336142,0.9909387929182077,0.9952070157383581,1.0,0.9940677900448637,0.9793516362404248,0.9737684517661872,0.9652475002477021,0.9706023502951834,0.9576349935556685,0.963817963640189,0.9671553159312599,0.9768921482722219,0.9739311400452509,0.9615758011174523,0.9662073203201738,0.9587146892021873,0.9617984271835397,0.9742430611818019,0.9655125312787585,0.955805871701332,0.9397531460202736,0.9409629107420339,0.9414689161413275,0.9385788546826702,0.9395354128347597,0.9243939861604873,0.8973171928076287,0.8825806520008008,0.8670857147051041,0.8417507868363572,0.8405222660723991,0.8433405652826474,0.8257885794459058,0.8123433513703939,0.8093134350753484,0.7789221228740943,0.736927752133194,0.7148001074802766,0.6872099694072642,0.6415279976742507,0.5988433230324606,0.543625942542088,0.4897214850055636,0.44426295481873307,0.41410527766485644,0.340662732518859,0.26434317359573306,0.19423471882042434,0.14735929196756184,0.07478319442309472,0.04007432285590915)
-#Kriszta_R2_G2
+#*name*_R2_G2
 R2_G2 <- c(0.0,0.009218176113067255,0.02045510343384639,0.03476539267957415,0.04977270847449414,0.06625798313219622,0.08430822561746824,0.10435883881583305,0.1260215646169272,0.1485364769867256,0.1728518423521686,0.19813325786986538,0.22362819744518286,0.25011269988340323,0.27641375543701596,0.3027329527775255,0.3291723394562262,0.35578156667936195,0.3839614907154035,0.41067980736764226,0.436896718449135,0.461852536633579,0.48859925950477456,0.5152981214776438,0.5404428768243088,0.5620723028981385,0.5851068819794408,0.6105790249672761,0.6312385815652949,0.6542933314491337,0.6760880626206742,0.6969018244073156,0.7173865275987305,0.7396011456538425,0.7578984506317221,0.7779171963491563,0.7947354682795034,0.8132377038369999,0.829253082343303,0.8459597584134625,0.8603820015809612,0.8727415713198401,0.885817860995003,0.9005846787596794,0.9099946565276358,0.9207276718465844,0.9294866936557574,0.9387243244481943,0.947687322006095,0.954849985922212,0.9621279456682127,0.96975549287356,0.9754133433081333,0.9779317097786738,0.9826274487384118,0.9873569648408589,0.9878103901594174,0.9915576239844925,0.9947004498566381,0.9974807980524314,1.0,0.999478065565134,0.9987272104245573,0.9955675556579877,0.9924783196695044,0.990626067098115,0.985363039236269,0.976823628531636,0.9706600757873147,0.96192755053532,0.951351724251523,0.9403965913969499,0.9332475338210052,0.9220467707201585,0.9079768601508131,0.8936990351553218,0.8750723135206322,0.8557318557961875,0.8355756144306934,0.8131074887744709,0.7901288866540541,0.7646588920357198,0.7371773074413432,0.7079564983820987,0.6758955448426182,0.6397933889180178,0.6029607873630997,0.5609854666383878,0.5173476659815357,0.47214991035928255,0.4294638373913447,0.38217345052131974,0.3354809071418605,0.28780978145472547,0.2394798224539703,0.1916532980396009,0.14491528083903854,0.1027189167634527,0.06656722898646969,0.036390634207031446)
 
 x <- seq(0, 1, length.out = length(W1_sorted))
@@ -219,7 +219,7 @@ coverage_plot<- ggplot(df, aes(x = x)) +
 coverage_plot
 
 #save
-ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/coverage_plot.png", width = 7, height = 4)
+ggsave("/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/coverage_plot.png", width = 7, height = 4)
 ```
 ```{r}
 #plot coverage curves next to each other 
@@ -246,7 +246,7 @@ plot1 <- ggplot(df, aes(x = x)) +
 
 # Arrange the plots next to each other
 p<- grid.arrange(plot1, plot2, plot3, ncol = 3)
-ggsave( "/drives/raid/AboobakerLab/kriszta/ACME_vs_live/coverage.png",plot=p,  height=3, width=9)
+ggsave( "/drives/raid/AboobakerLab/*name*/ACME_vs_live/coverage.png",plot=p,  height=3, width=9)
 ```
 
 
@@ -294,7 +294,7 @@ plot3 <- ggplot(data.frame(x = x, coverage = s1r1_sorted), aes(x = x)) +
 
 p<-grid.arrange(plot1, plot2, plot3, ncol = 3)
 #save
-ggsave( "/drives/raid/AboobakerLab/kriszta/ACME_vs_live/coverage.png",plot=p,  height=3, width=9)
+ggsave( "/drives/raid/AboobakerLab/*name*/ACME_vs_live/coverage.png",plot=p,  height=3, width=9)
 ```
 
 
@@ -303,22 +303,22 @@ ggsave( "/drives/raid/AboobakerLab/kriszta/ACME_vs_live/coverage.png",plot=p,  h
 #correlation plots between replicates of new data
 log_DE_matrix<- log(DE_matrix_all+1)
 log_DE_matrix
-Kriszta_G2<- ggplot(log_DE_matrix, aes(x = Kriszta_G2_1, y =Kriszta_G2_2))+ 
+*name*_G2<- ggplot(log_DE_matrix, aes(x = *name*_G2_1, y =*name*_G2_2))+ 
   geom_point(color="#444e86", size=0.3)+ 
   ylab("2nd replicate ln(TPM)")+ xlab("1st replicate ln(TPM)")+ 
   ggtitle("Expression correlation \nbetween G2 replicates")+
   stat_cor(method="pearson")+theme_classic(base_size=10)
 
-Kriszta_G1<- ggplot(log_DE_matrix, aes(x = Kriszta_G1_1, y =Kriszta_G1_2))+ 
+*name*_G1<- ggplot(log_DE_matrix, aes(x = *name*_G1_1, y =*name*_G1_2))+ 
   geom_point(color="#a5aed5",size=0.3)+  
   ylab("2nd replicate ln(TPM)")+ xlab("1st replicate ln(TPM)")+ 
   ggtitle("Expression correlation \nbetween G1 replicates")+
   stat_cor(method="pearson")+theme_classic(base_size=10)
 
 
-correlation_plots<- ggarrange(Kriszta_G2, Kriszta_G1)
+correlation_plots<- ggarrange(*name*_G2, *name*_G1)
 correlation_plots
-ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/correlation_plots.png", plot=correlation_plots, width=5.5, height=3)
+ggsave("/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/correlation_plots.png", plot=correlation_plots, width=5.5, height=3)
 
 ```
 
@@ -329,8 +329,8 @@ ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/correlation_plots
 DE_matrix$live_X1_avg<- (DE_matrix$Aboobaker_X1_1+ DE_matrix$Aboobaker_X1_2+ DE_matrix$Pearson_X1_1+ DE_matrix$Pearson_X1_2+ DE_matrix$Reddien_X1_1+ DE_matrix$Reddien_X1_2+  DE_matrix$Sanchez_X1_1+ DE_matrix$Sanchez_X1_2+ DE_matrix$Sanchez_X1_3+ DE_matrix$Sanchez_X1_4)/10
 
 DE_matrix$live_nonX1<- ((DE_matrix$Pearson_X2_1+ DE_matrix$Pearson_X2_2+ DE_matrix$Reddien_X2_1+ DE_matrix$Reddien_X2_2)/4)+ ((DE_matrix$Pearson_Xins_1+ DE_matrix$Pearson_Xins_2+ DE_matrix$Sanchez_Xins_1+ DE_matrix$Sanchez_Xins_2+ DE_matrix$Sanchez_Xins_3+ DE_matrix$Sanchez_Xins_4)/6) /2
-DE_matrix$ACME_G2_avg<- (DE_matrix$Aboobaker_G2_3+ DE_matrix$Aboobaker_G2_4+DE_matrix$Kriszta_G2_1+DE_matrix$Kriszta_G2_2)/4
-DE_matrix$ACME_G1_avg<- (DE_matrix$Aboobaker_G1_1+ DE_matrix$Aboobaker_G1_2+ DE_matrix$Kriszta_G1_1+DE_matrix$Kriszta_G1_2)/4
+DE_matrix$ACME_G2_avg<- (DE_matrix$Aboobaker_G2_3+ DE_matrix$Aboobaker_G2_4+DE_matrix$*name*_G2_1+DE_matrix$*name*_G2_2)/4
+DE_matrix$ACME_G1_avg<- (DE_matrix$Aboobaker_G1_1+ DE_matrix$Aboobaker_G1_2+ DE_matrix$*name*_G1_1+DE_matrix$*name*_G1_2)/4
 
 #store the averages in a new data frame
 averaged_matrix <- DE_matrix[, 29:32]
@@ -376,7 +376,7 @@ pca.plot_DE
 ```{r}
 #prepare annotations 
 
-pca_table_DE$lab<- c("Aboobaker","Aboobaker","Aboobaker","Aboobaker","Aboobaker","Aboobaker",  "Kriszta", "Kriszta", "Kriszta", "Kriszta", "Pearson", "Pearson","Pearson","Pearson","Reddien", "Reddien", "Reddien", "Reddien", "Sanchez", "Sanchez","Sanchez","Sanchez","Sanchez","Sanchez","Sanchez","Sanchez")
+pca_table_DE$lab<- c("Aboobaker","Aboobaker","Aboobaker","Aboobaker","Aboobaker","Aboobaker",  "*name*", "*name*", "*name*", "*name*", "Pearson", "Pearson","Pearson","Pearson","Reddien", "Reddien", "Reddien", "Reddien", "Sanchez", "Sanchez","Sanchez","Sanchez","Sanchez","Sanchez","Sanchez","Sanchez")
 
 pca_table_DE$cycle<- c("Neoblasts",
                        "Neoblasts", 
@@ -431,7 +431,7 @@ pca.plot_DE_dissociation <- ggplot2::autoplot(pca_DE, x = 1,
 pca.plot_DE_dissociation
 
 #save the plot
-ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/pca.plot_dissociation.png",plot= pca.plot_DE_dissociation, height=6.5, width=6)
+ggsave("/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/pca.plot_dissociation.png",plot= pca.plot_DE_dissociation, height=6.5, width=6)
 
 
 ```
@@ -455,7 +455,7 @@ pca.plot_DE_cycle <- ggplot2::autoplot(pca_DE, x = 1,
 pca.plot_DE_cycle
 
 
-ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/pca.plot_DE_cycle.png",plot= pca.plot_DE_cycle, height=6.5, width=6)
+ggsave("/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/pca.plot_DE_cycle.png",plot= pca.plot_DE_cycle, height=6.5, width=6)
 
 
 ```
@@ -489,7 +489,7 @@ scree_plot<- ggplot(eigenvalues, aes(x=PC_number, y=explained_variation)) +
 
 
 
-ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/scree_plot.png", plot= scree_plot, width=5.5,  height=5)
+ggsave("/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/scree_plot.png", plot= scree_plot, width=5.5,  height=5)
 
 ```
 #4 DESEQ2
@@ -554,7 +554,7 @@ volcano_comp<- volcano_comp[!is.na(volcano_comp$padj),]
 #create a direct correspondence with the Rink annotation to be able to browse on Planmine 
 matches_volcano <- match(volcano_comp$genes, gene_correspondence$V4)
 volcano_comp$GeneID <- gene_correspondence$V1[matches_volcano]
-write.csv(volcano_comp, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/volcanodata.csv")
+write.csv(volcano_comp, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/volcanodata.csv")
 
 
 
@@ -580,7 +580,7 @@ subset_volcano_comp_X1$GeneID <- gene_correspondence$V5[matches_live]
 
 ```{r}
 #manually annotated the volcano file 
-volcano_comp<- read.csv("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/final_volcanodata_annotated.csv")
+volcano_comp<- read.csv("/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/final_volcanodata_annotated.csv")
 
 #plot 
 volcanoplot<-ggplot(data = volcano_comp, aes(x = log2FoldChange, y = -log10(padj), col = up_down, label = Annotation
@@ -595,7 +595,7 @@ volcanoplot<-ggplot(data = volcano_comp, aes(x = log2FoldChange, y = -log10(padj
    theme_classic()+ 
 geom_text_repel(size=3, segment.size = 0.2, min.segment.length = 0.5, box.padding = unit(0.2, "lines"), force = 10)
 volcanoplot
-ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/volcanoplot.png", plot=volcanoplot, width=9, height=6)
+ggsave("/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/volcanoplot.png", plot=volcanoplot, width=9, height=6)
 ```
 
 
@@ -624,14 +624,14 @@ ggplot(data = tf_volcano, aes(x = log2FoldChange, y = -log10(padj), col = up_dow
  labs(color = NULL) +
    theme_classic()+  
 geom_text_repel()
-ggsave("/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/tf_volcano.png", width=9, height=6)
+ggsave("/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/tf_volcano.png", width=9, height=6)
 
 
 tf_volcano_G2<- tf_volcano[tf_volcano$up_down== "Down" & tf_volcano$significant=="Sig",]
-write.csv(tf_volcano_G2, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/transcription_factors_G2.csv")
+write.csv(tf_volcano_G2, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/transcription_factors_G2.csv")
 
 tf_volcano_X1<- tf_volcano[tf_volcano$up_down== "Up" & tf_volcano$significant=="Sig",]
-write.csv(tf_volcano_X1, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/annotations_functional/transcription_factors_X1.csv")
+write.csv(tf_volcano_X1, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/annotations_functional/transcription_factors_X1.csv")
 
 ```
 
@@ -806,7 +806,7 @@ filtered_genes_with_desc <- merge(significant_filtered_genes_df, significant_ter
 
 # Display the results
 print(filtered_genes_with_desc)
-#write.csv(filtered_genes_with_desc, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/X1_GO.csv")
+#write.csv(filtered_genes_with_desc, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/X1_GO.csv")
 
 ```
 
@@ -858,7 +858,7 @@ filtered_genes_with_desc <- merge(significant_filtered_genes_df, significant_ter
 filtered_genes_with_desc
 
 print(filtered_genes_with_desc)
-#write.csv(filtered_genes_with_desc, file="/drives/raid/AboobakerLab/kriszta/ACME_vs_live/Figures/G2_GO.csv")
+#write.csv(filtered_genes_with_desc, file="/drives/raid/AboobakerLab/*name*/ACME_vs_live/Figures/G2_GO.csv")
 
 ```
 
